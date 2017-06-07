@@ -1,0 +1,38 @@
+INSERT INTO `hotel_types` 
+(`id`, `class`, `description`) 
+VALUES (NULL, '1', '1 1 1 1 1 1 1 1'), 
+(NULL, '2', '2 2 2 2 2 2 2 2'), 
+(NULL, '3', '3 3 3 3 3 3 3 3'), 
+(NULL, '4', '4 4 4 4 4 4 4 4'), 
+(NULL, '5', '5 5 5 5 5 5 5 5');
+
+INSERT INTO `hotels` 
+(`id`, `name`, `description`, `hotel_type_id`) 
+VALUES (NULL, 'Hilton', 'wefewfwfwfwefdvcdw', '4'), 
+(NULL, 'Wilson', 'ewgbaenberdassvdbsnbsdcdds e ewef w', '2');
+
+
+INSERT INTO `rest_type` (`id`, `name`, `description`) 
+VALUES (NULL, 'Rest', 'Rest'), 
+(NULL, 'Excortions', 'Excortions'), 
+(NULL, 'Shoping', 'Shoping');
+
+INSERT INTO `tours` (`id`, `name`, `description`, `id_rest_type`, `places`, `id_hotel`, `price`, `is_hot`) 
+VALUES (NULL, 'Turke Gambit', 'Turke Gambit Turke Gambit Turke Gambit', '1', '457457547', '1', '323243.23', '1'), 
+(NULL, 'Egiped excorcion', 'Egiped excorcion Egiped excorcion Egiped excorcion', '1', '2', '2', '234', '2');
+
+INSERT INTO `user_role` (`id`, `name`, `description`) 
+VALUES (NULL, 'user', 'user user user'), 
+(NULL, 'manager', 'manager manager manager'), 
+(NULL, 'admin', 'admin admin admin');
+
+INSERT INTO `users` (`id`, `name`, `birthday`, `email`, `phone`, `login`, `password`, `id_role`) 
+VALUES (NULL, 'djec1', '2016-06-08', 'qwdqwdwq@qdw.com', '33251532532', 'djec1', '8E35C2CD3BF6641BDB0E2050B76932CBB2E6034A0DDACC1D9BEA82A6BA57F7CF', '1'), 
+(NULL, 'djec2', '2016-06-08', 'qwdqwqweq@qdw.com', '2352532', 'djec2', '8E35C2CD3BF6641BDB0E2050B76932CBB2E6034A0DDACC1D9BEA82A6BA57F7CF', '2'), 
+(NULL, 'djec3', '2016-06-08', 'qwdqqwq@qdw.com', '3323532', 'djec3', '8E35C2CD3BF6641BDB0E2050B76932CBB2E6034A0DDACC1D9BEA82A6BA57F7CF', '3');
+
+INSERT INTO `order_status` (`id`, `name`, `description`) 
+VALUES (NULL, 'registered', 'registered registered registered '), 
+(NULL, 'paid', 'paid paid paid'), 
+(NULL, 'canceled', 'canceled canceled canceled');
+

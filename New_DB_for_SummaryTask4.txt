@@ -1,0 +1,123 @@
+
+
+DROP TABLE orders, blocked_users, users, tours, hotels, hotel_types, order_status, rest_type, user_role, disconts;
+
+CREATE DATABASE `final` CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE `final`.`hotel_types` 
+( `id` INT NOT NULL AUTO_INCREMENT , 
+`class` INT NOT NULL , 
+`description` VARCHAR(320) NULL , 
+PRIMARY KEY (`id`), 
+UNIQUE (`class`)) 
+ENGINE = InnoDB CHARACTER SET=UTF8; 
+
+CREATE TABLE `final`.`hotels` 
+( `id` INT NOT NULL AUTO_INCREMENT , 
+`name` VARCHAR(32) NOT NULL , 
+`description` VARCHAR(320) NULL , 
+`hotel_type_id` INT NOT NULL , 
+PRIMARY KEY (`id`),
+FOREIGN KEY (hotel_type_id) REFERENCES hotel_types(id), 
+UNIQUE (`name`)) 
+ENGINE = InnoDB CHARACTER SET=UTF8; 
+
+CREATE TABLE `final`.`rest_type` 
+( `id` INT NOT NULL AUTO_INCREMENT , 
+`name` VARCHAR(32) NOT NULL , 
+`description` VARCHAR(320) NULL , 
+PRIMARY KEY (`id`)) 
+ENGINE = InnoDB CHARACTER SET=UTF8; 
+
+CREATE TABLE `final`.`tours` 
+( `id` INT NOT NULL AUTO_INCREMENT , 
+`name` VARCHAR(32) NOT NULL , 
+`description` VARCHAR(320) NULL , 
+`id_rest_type` INT NOT NULL , 
+`places` INT(3) NOT NULL , 
+`id_hotel` INT NOT NULL , 
+`price` DOUBLE NOT NULL , 
+`is_hot` BOOLEAN NOT NULL, 
+PRIMARY KEY (`id`), 
+FOREIGN KEY (id_rest_type) REFERENCES rest_type(id),
+FOREIGN KEY (id_hotel) REFERENCES hotels(id) ) 
+ENGINE = InnoDB CHARACTER SET=UTF8; 
+
+
+CREATE TABLE `final`.`user_role` 
+( `id` INT NOT NULL AUTO_INCREMENT , 
+`name` VARCHAR(32) NOT NULL , 
+`description` VARCHAR(320) NULL , 
+PRIMARY KEY (`id`), 
+UNIQUE (`name`)) 
+ENGINE = InnoDB CHARACTER SET=UTF8; 
+
+
+CREATE TABLE `final`.`users` 
+( `id` INT NOT NULL AUTO_INCREMENT, 
+`name` VARCHAR(32) NOT NULL , 
+`birthday` DATE NOT NULL , 
+`email` VARCHAR(100) NOT NULL , 
+`phone` VARCHAR(64) NOT NULL , 
+`login` VARCHAR(32) NOT NULL , 
+`password` VARCHAR(64) NOT NULL , 
+`id_role` INT NOT NULL, 
+PRIMARY KEY (`id`), 
+UNIQUE (`login`), 
+UNIQUE (`email`), 
+UNIQUE (`phone`), 
+FOREIGN KEY (id_role) REFERENCES user_role(id) ) 
+ENGINE = InnoDB CHARACTER SET=UTF8; 
+
+CREATE TABLE `final`.`order_status` 
+( `id` INT NOT NULL AUTO_INCREMENT , 
+`name` VARCHAR(32) NOT NULL , 
+`description` VARCHAR(320) NULL , 
+PRIMARY KEY (`id`), 
+UNIQUE (`name`)) 
+ENGINE = InnoDB CHARACTER SET=UTF8; 
+
+CREATE TABLE `final`.`orders` 
+( `id` INT NOT NULL AUTO_INCREMENT , 
+`register_time` DATETIME NOT NULL , 
+`id_user` INT NOT NULL , 
+`id_tour` INT NOT NULL , 
+`price` DOUBLE NOT NULL ,
+`cost` DOUBLE NOT NULL ,
+`id_status` INT NOT NULL , 
+PRIMARY KEY (`id`), 
+FOREIGN KEY (id_user) REFERENCES users(id), 
+FOREIGN KEY (id_tour) REFERENCES tours(id), 
+FOREIGN KEY (id_status) REFERENCES order_status(id) ) 
+ENGINE = InnoDB CHARACTER SET=UTF8; 
+
+
+CREATE TABLE `final`.`disconts` 
+( `id` INT NOT NULL AUTO_INCREMENT , 
+`time_discont_registration` DATETIME NOT NULL , 
+`percent_step` INT NOT NULL , 
+`max_percent` INT NOT NULL , 
+PRIMARY KEY (`id`)) 
+ENGINE = InnoDB CHARACTER SET=UTF8; 
+
+CREATE TABLE `final`.`blocked_users` 
+( `id_user` INT NOT NULL , 
+`time_start_block` DATETIME NOT NULL , 
+`description` VARCHAR(320) NULL , 
+FOREIGN KEY (id_user) REFERENCES users(id), 
+UNIQUE (`id_user`)) 
+ENGINE = InnoDB CHARACTER SET=UTF8; 
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+SELECT tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, 
+rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description FROM tours LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id
+
+SELECT tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, 
+rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description FROM tours LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id WHERE (rest_type.id = 1) 
+AND (tours.price BETWEEN 10 AND 20000000) AND (tours.places = 2) AND (hotel_types.id = 2)
+
+SELECT users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password, user_role.id, user_role.name, user_role.description FROM users LEFT JOIN user_role ON users.id_role=user_role.id WHERE users.id=1
+
+SELECT orders.id, orders.register_time, orders.cost, users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password, user_role.id, user_role.name, user_role.description, tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description, order_status.id, order_status.name, order_status.description FROM orders LEFT JOIN users ON orders.id_user=users.id LEFT JOIN user_role ON users.id_role=user_role.id LEFT JOIN tours ON orders.id_tour=tours.id LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id LEFT JOIN order_status ON orders.id_status=order_status.id

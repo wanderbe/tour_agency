@@ -1,0 +1,43 @@
+INSERT INTO `hotel_types` 
+(`id`, `class`, `description`) 
+VALUES (NULL, '1', '1'), 
+(NULL, '2', '2'), 
+(NULL, '3', '3'), 
+(NULL, '4', '4'), 
+(NULL, '5', '5');
+
+INSERT INTO `hotels` 
+(`id`, `name`, `description`, `hotel_type_id`) 
+VALUES (NULL, 'Hilton', 'Hilton', '4'), 
+(NULL, 'Wilson', 'Wilson', '2');
+
+
+INSERT INTO `rest_type` (`id`, `name`, `description`) 
+VALUES (NULL, 'Rest', 'Rest'), 
+(NULL, 'Excortions', 'Excortions'), 
+(NULL, 'Shoping', 'Shoping');
+
+INSERT INTO `tours` (`id`, `name`, `description`, `id_rest_type`, `places`, `id_hotel`, `price`, `is_hot`) 
+VALUES (NULL, 'Turke', 'Turke', '1', '1', '1', '100', '1'), 
+(NULL, 'Egiped', 'Egiped', '1', '2', '2', '234', '2');
+
+INSERT INTO `user_role` (`id`, `name`, `description`) 
+VALUES (NULL, 'user', 'user'), 
+(NULL, 'manager', 'manager'), 
+(NULL, 'admin', 'admin');
+
+INSERT INTO `users` (`id`, `name`, `birthday`, `email`, `phone`, `login`, `password`, `id_role`) 
+VALUES (NULL, 'djec1', '2016-06-08', 'tour.agency.user1@gmail.com', '1', 'djec1', '8E35C2CD3BF6641BDB0E2050B76932CBB2E6034A0DDACC1D9BEA82A6BA57F7CF', '1'), 
+(NULL, 'djec2', '2016-06-08', 'tour.agency.user2@gmail.com', '2', 'djec2', '8E35C2CD3BF6641BDB0E2050B76932CBB2E6034A0DDACC1D9BEA82A6BA57F7CF', '2'), 
+(NULL, 'djec3', '2016-06-08', 'tour.agency.user3@gmail.com', '3', 'djec3', '8E35C2CD3BF6641BDB0E2050B76932CBB2E6034A0DDACC1D9BEA82A6BA57F7CF', '3'), 
+(NULL, 'djec4', '2016-06-08', 'tour.agency.user4@gmail.com', '4', 'djec4', '8E35C2CD3BF6641BDB0E2050B76932CBB2E6034A0DDACC1D9BEA82A6BA57F7CF', '1'),;
+
+INSERT INTO `order_status` (`id`, `name`, `description`) 
+VALUES (NULL, 'registered', 'registered'), 
+(NULL, 'paid', 'paid'), 
+(NULL, 'canceled', 'canceled');
+
+INSERT INTO `disconts` 
+(`id`, `time_discont_registration`, `percent_step`, `max_percent`) 
+VALUES ('NULL', '2017-05-29 13:39:28', '2', '5') 
+

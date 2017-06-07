@@ -1,0 +1,309 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DELETE_REST_TYPE_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+DELETE FROM rest_type WHERE id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DELETE_USER_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+DELETE FROM users WHERE id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ALL_USERS`()
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password, user_role.id, user_role.name, user_role.description FROM users LEFT JOIN user_role ON users.id_role=user_role.id
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_HOTEL_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description FROM hotels LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id WHERE hotels.id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ALL_ORDER_STATUSES`()
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM order_status
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DELETE_USER_ROLE_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+DELETE FROM user_role WHERE id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DELETE_ORDER_STATUS_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+DELETE FROM order_status WHERE id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ALL_ORDERS`()
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT orders.id, orders.register_time, orders.cost, users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password, user_role.id, user_role.name, user_role.description, tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description, order_status.id, order_status.name, order_status.description FROM orders LEFT JOIN users ON orders.id_user=users.id LEFT JOIN user_role ON users.id_role=user_role.id LEFT JOIN tours ON orders.id_tour=tours.id LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id LEFT JOIN order_status ON orders.id_status=order_status.id
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ALL_TOURS`()
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description FROM tours LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DELETE_TOUR_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+DELETE FROM tours WHERE id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ALL_USER_ROLES`()
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM user_role
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ALL_HOTELS`()
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description FROM hotels LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DELETE_HOTEL_TYPE_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+DELETE FROM hotel_types WHERE id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FIND_ALL_HOTEL_TYPES`()
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM hotel_types
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DELETE_ORDER_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+DELETE FROM orders WHERE id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_HOTEL_BY_NAME`(IN `n` VARCHAR(32) CHARSET utf8)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description FROM hotels LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id WHERE hotels.name=n
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_HOTEL_TYPE_BY_CLASS_OF_HOTEL`(IN `cl` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM hotel_types WHERE class=cl
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_HOTEL_TYPE_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM hotel_types WHERE id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ORDERS_BY_USER_ID`(IN `iu` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT orders.id, orders.register_time, orders.cost, users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password, user_role.id, user_role.name, user_role.description, tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description, order_status.id, order_status.name, order_status.description FROM orders LEFT JOIN users ON orders.id_user=users.id LEFT JOIN user_role ON users.id_role=user_role.id LEFT JOIN tours ON orders.id_tour=tours.id LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id LEFT JOIN order_status ON orders.id_status=order_status.id WHERE orders.id_user=iu
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ORDER_BY_ID`(IN `io` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT orders.id, orders.register_time, orders.cost, users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password, user_role.id, user_role.name, user_role.description, tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description, order_status.id, order_status.name, order_status.description FROM orders LEFT JOIN users ON orders.id_user=users.id LEFT JOIN user_role ON users.id_role=user_role.id LEFT JOIN tours ON orders.id_tour=tours.id LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id LEFT JOIN order_status ON orders.id_status=order_status.id WHERE orders.id=io
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ORDER_STATUS_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM order_status WHERE id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ORDER_STATUS_BY_NAME`(IN `n` VARCHAR(32) CHARSET utf8)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM order_status WHERE name=n
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_REST_TYPE_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM rest_type WHERE id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_REST_TYPE_BY_NAME`(IN `n` VARCHAR(32) CHARSET utf8)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM rest_type WHERE name=n
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_TOUR_BY_NAME`(IN `n` VARCHAR(32) CHARSET utf8)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description FROM tours LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id WHERE tours.name=n
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_USER_BY_EMAIL`(IN `e` VARCHAR(32) CHARSET utf8)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password,user_role.id, user_role.name, user_role.description FROM users LEFT JOIN user_role ON users.id_role=user_role.id WHERE users.email=e
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_USER_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password,user_role.id, user_role.name, user_role.description FROM users LEFT JOIN user_role ON users.id_role=user_role.id WHERE users.id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_USER_BY_LOGIN`(IN `l` VARCHAR(32) CHARSET utf8)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password,user_role.id, user_role.name, user_role.description FROM users LEFT JOIN user_role ON users.id_role=user_role.id WHERE users.login=l
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ALL_REST_TYPES`()
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM rest_type
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_USER_BY_NAME`(IN `n` VARCHAR(32) CHARSET utf8)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password,user_role.id, user_role.name, user_role.description FROM users LEFT JOIN user_role ON users.id_role=user_role.id WHERE users.name=n
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_USER_ROLE_BY_ID`(IN `w` INT UNSIGNED)
+    MODIFIES SQL DATA
+    SQL SECURITY INVOKER
+SELECT * FROM user_role WHERE id=w
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_USER_ROLE_BY_NAME`(IN `w` VARCHAR(32) CHARSET utf8)
+    MODIFIES SQL DATA
+    SQL SECURITY INVOKER
+SELECT * FROM user_role WHERE name=w
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_HOTEL_TYPE`(IN `cl` INT UNSIGNED, IN `d` VARCHAR(320) CHARSET utf8)
+    NO SQL
+    SQL SECURITY INVOKER
+INSERT INTO hotel_types (class, description) VALUES (cl, d)
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_ORDER`(IN `rt` DATETIME, IN `iu` INT UNSIGNED, IN `it` INT UNSIGNED, IN `cs` INT UNSIGNED, IN `ist` INT UNSIGNED)
+    NO SQL
+INSERT INTO orders (register_time, id_user, id_tour, cost, id_status) VALUES (rt, iu, it, cs, ist)
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_ORDER_STATUS`(IN `n` VARCHAR(32) CHARSET utf8, IN `d` VARCHAR(320) CHARSET utf8)
+    NO SQL
+    SQL SECURITY INVOKER
+INSERT INTO order_status (name, description) VALUES (n, d)
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_REST_TYPE`(IN `n` VARCHAR(32) CHARSET utf8, IN `d` VARCHAR(320) CHARSET utf8)
+    NO SQL
+    SQL SECURITY INVOKER
+INSERT INTO rest_type (name, description) VALUES (n, d)
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_TOUR`(IN `n` VARCHAR(32), IN `d` VARCHAR(320), IN `ir` INT UNSIGNED, IN `pl` INT UNSIGNED, IN `ih` INT UNSIGNED, IN `pr` INT UNSIGNED, IN `hot` BOOLEAN)
+    NO SQL
+INSERT INTO tours (name, description, id_rest_type, places, id_hotel, price, is_hot) VALUES (n, d, ir, pl, ih, pr, hot)
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_USER`(IN `n` VARCHAR(32) CHARSET utf8, IN `b` DATE, IN `e` VARCHAR(100) CHARSET utf8, IN `p` VARCHAR(64) CHARSET utf8, IN `l` VARCHAR(32) CHARSET utf8, IN `pas` VARCHAR(32) CHARSET utf8, IN `ir` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+INSERT INTO users (name, birthday, email, phone, login, password, id_role) VALUES (n, b, e, p, l, pas, ir)
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_USER_ROLE`(IN `n` VARCHAR(32) CHARSET utf8, IN `d` VARCHAR(320) CHARSET utf8)
+    NO SQL
+    SQL SECURITY INVOKER
+INSERT INTO user_role (name, description) VALUES (n, d)
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_HOTEL`(IN `n` VARCHAR(32) CHARSET utf8, IN `d` VARCHAR(320) CHARSET utf8, IN `iht` INT UNSIGNED, IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+UPDATE hotels SET name =n, description =d, hotel_type_id=iht WHERE id =i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_HOTEL_TYPE`(IN `cl` INT UNSIGNED, IN `d` VARCHAR(320) CHARSET utf8, IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+UPDATE hotel_types SET class =cl, description =d WHERE id =i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_ORDER`(IN `rt` TIMESTAMP, IN `iu` INT UNSIGNED, IN `it` INT UNSIGNED, IN `cs` INT UNSIGNED, IN `ist` INT UNSIGNED, IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+UPDATE orders SET register_time =rt, id_user =iu, id_tour =it, cost =cs, id_status =ist WHERE id =i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_ORDER_STATUS`(IN `n` VARCHAR(32) CHARSET utf8, IN `d` VARCHAR(320) CHARSET utf8, IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+UPDATE order_status SET name =n, description =d WHERE id =i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_REST_TYPE`(IN `n` VARCHAR(32) CHARSET utf8, IN `d` VARCHAR(320) CHARSET utf8, IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+UPDATE rest_type SET name =n, description =d WHERE id =i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_TOUR`(IN `n` VARCHAR(32), IN `d` VARCHAR(320), IN `ir` INT UNSIGNED, IN `pl` INT UNSIGNED, IN `ih` INT UNSIGNED, IN `pr` INT UNSIGNED, IN `hot` BOOLEAN, IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+UPDATE tours SET name =n, description =d, id_rest_type=ir, places=pl, id_hotel=ih, price=pr, is_hot=hot WHERE id =i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_USER`(IN `n` VARCHAR(32) CHARSET utf8, IN `b` DATE, IN `e` VARCHAR(100) CHARSET utf8, IN `p` VARCHAR(64) CHARSET utf8, IN `l` VARCHAR(32) CHARSET utf8, IN `pas` VARCHAR(32) CHARSET utf8, IN `r` INT UNSIGNED, IN `i` INT UNSIGNED)
+    NO SQL
+UPDATE users SET name =n, birthday =b, email =e, phone=p, login=l, password=pas, id_role=r WHERE id =i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_USER_ROLE`(IN `n` VARCHAR(32) CHARSET utf8, IN `d` VARCHAR(32) CHARSET utf8, IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+UPDATE user_role SET name =n, description =d WHERE id =i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DELETE_HOTEL_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+DELETE FROM hotels WHERE id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_HOTEL`(IN `n` VARCHAR(32) CHARSET utf8, IN `d` VARCHAR(320) CHARSET utf8, IN `iht` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+INSERT INTO hotels (name, description, hotel_type_id) VALUES (n, d, iht)
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ALL_DISCONTS`()
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM disconts
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_DISCONT_BY_REGISTER_TIME`(IN `tdr` DATETIME)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM disconts WHERE time_discont_registration=tdr
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_DISCONT_BY_ID`(IN `i` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM disconts WHERE id=i
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_LATEST_DISCONTS`()
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM disconts WHERE time_discont_registration=(SELECT MAX(time_discont_registration) FROM disconts)
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_DISCONT`(IN `tdr` DATETIME, IN `ps` INT UNSIGNED, IN `mp` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+INSERT INTO disconts (time_discont_registration, percent_step, max_percent) VALUES (tdr, ps, mp)
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ALL_BLOCKED_USERS`()
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT blocked_users.time_start_block, blocked_users.description, users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password, user_role.id, user_role.name, user_role.description FROM blocked_users LEFT JOIN users ON blocked_users.id_user=users.id LEFT JOIN user_role ON users.id_role=user_role.id
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_BLOCKED_USER_BY_ID`(IN `iu` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT blocked_users.time_start_block, blocked_users.description, users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password, user_role.id, user_role.name, user_role.description FROM blocked_users LEFT JOIN users ON blocked_users.id_user=users.id LEFT JOIN user_role ON users.id_role=user_role.id WHERE blocked_users.id_user=iu
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_BLOCKED_USER`(IN `iu` INT UNSIGNED, IN `ts` DATETIME, IN `d` VARCHAR(320) CHARSET utf8)
+    NO SQL
+    SQL SECURITY INVOKER
+INSERT INTO blocked_users (id_user, time_start_block, description) VALUES (iu, ts, d)
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DELETE_BLOCKED_USER`(IN `iu` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+DELETE FROM blocked_users WHERE id_user=iu
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_TOUR_BY_ID`(IN `it` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description FROM tours LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id WHERE tours.id=it
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ORDERS_BY_TOUR_ID`(IN `it` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT orders.id, orders.register_time, orders.cost, users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password, user_role.id, user_role.name, user_role.description, tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description, order_status.id, order_status.name, order_status.description FROM orders LEFT JOIN users ON orders.id_user=users.id LEFT JOIN user_role ON users.id_role=user_role.id LEFT JOIN tours ON orders.id_tour=tours.id LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id LEFT JOIN order_status ON orders.id_status=order_status.id WHERE orders.id_tour=it
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ORDER_BY_ORDER_STATUS_ID`(IN `ios` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT orders.id, orders.register_time, orders.cost, users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password, user_role.id, user_role.name, user_role.description, tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description, order_status.id, order_status.name, order_status.description FROM orders LEFT JOIN users ON orders.id_user=users.id LEFT JOIN user_role ON users.id_role=user_role.id LEFT JOIN tours ON orders.id_tour=tours.id LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id LEFT JOIN order_status ON orders.id_status=order_status.id WHERE orders.id_status=ios
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ORDERS_BY_ORDER_STATUS_ID_AND_USER_ID`(IN `io` INT UNSIGNED, IN `iu` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT orders.id, orders.register_time, orders.cost, users.id, users.name, users.birthday, users.email, users.phone, users.login, users.password, user_role.id, user_role.name, user_role.description, tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description, order_status.id, order_status.name, order_status.description FROM orders LEFT JOIN users ON orders.id_user=users.id LEFT JOIN user_role ON users.id_role=user_role.id LEFT JOIN tours ON orders.id_tour=tours.id LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id LEFT JOIN order_status ON orders.id_status=order_status.id WHERE (orders.id_status=io) AND (orders.id_user=iu)
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_TOURS_BY_PARAMETRS`(IN `irts` INT UNSIGNED, IN `irtf` INT UNSIGNED, IN `prs` INT UNSIGNED, IN `prf` INT UNSIGNED, IN `pls` INT UNSIGNED, IN `plf` INT UNSIGNED, IN `ihts` INT UNSIGNED, IN `ihtf` INT UNSIGNED)
+    NO SQL
+    SQL SECURITY INVOKER
+SELECT tours.id, tours.name, tours.description, tours.places, tours.price, tours.is_hot, rest_type.id, rest_type.name, rest_type.description, hotels.id, hotels.name, hotels.description, hotel_types.id, hotel_types.class, hotel_types.description FROM tours LEFT JOIN rest_type ON tours.id_rest_type=rest_type.id LEFT JOIN hotels ON tours.id_hotel=hotels.id LEFT JOIN hotel_types ON hotels.hotel_type_id=hotel_types.id  WHERE (rest_type.id BETWEEN irts AND irtf) AND (tours.price BETWEEN prs AND prf) AND (tours.places BETWEEN pls AND plf) AND (hotel_types.id BETWEEN ihts AND ihtf)
