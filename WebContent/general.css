@@ -1,0 +1,164 @@
+* {
+    box-sizing: border-box;
+}
+	
+html {
+    font-size: 62.5%;
+}
+
+.wrapper{
+		margin: 0 5rem 0 5rem;
+		margin-top: 4REM;
+		margin-bottom: 4REM;
+		background: #e3f8ff;
+	}
+
+body{
+    font-size: 1.8rem;
+    font-family:'Times New Roman', Times, sans-serif;
+}
+
+h1{
+	margin-top: 2REM;
+	font-size: 3.5rem;
+	font-weight: bold;
+}
+
+h2{
+	font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+h3{
+	font-size: 2rem;
+	margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.main{
+    margin: 0 2rem 0 2rem;
+}
+
+.header{
+    background: #4a9eff;
+    
+}
+
+.message{
+	color: red;
+}
+
+.top{
+	display: flex;
+    justify-content: space-between;
+}
+
+.top h1{
+	text-align: center;
+	width: 100%
+}
+
+.autorization{
+	margin-right: 0;
+	text-align: right;
+}
+
+.autorization a{
+	margin-right: 0;
+	text-align: right;
+}
+
+.back{
+	display: block;
+	text-align: right;
+}
+
+.menu{
+	display: flex;
+	justify-content: space-between;
+}
+
+.menu ul{
+	display: flex;
+    justify-content: flex-start;
+}
+
+.header ul li{
+	display: block;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.orderselector{
+	text-align: right;
+}
+
+hr{
+	width: 60%
+	align: center;
+	size: 3px;
+}
+
+.discountform{
+	margin-top: 1rem;
+	display: inline-block;
+	padding-bottom: 0.5rem;
+	padding-left: 0.5rem;
+}
+
+.red {
+	color: #0217d4;
+}
+
+
+.hot {
+	background: #ff4a4a;
+}
+
+.bold {
+	font-weight: bold;
+	background: green;
+}
+
+table{
+	font-size: 1.48rem;
+	margin: auto;
+}
+
+.datatable{
+	width: 100%;
+}
+
+.userdata{
+	margin-left: 0;
+}
+
+.usercabinetdatamail{
+	margin-left: 0;
+	width: 100%;
+}
+
+.userdiscount{
+	font-weight: bold;
+	text-align: right;
+}
+
+.tablehead{
+	background: grey;
+
+ }
+ 
+.confirmorder{
+	text-align: right;
+    padding-bottom: 1rem;
+}
+
+th{
+	font-weight: bold;
+}
+
+td{
+	padding: 1rem;
+}
